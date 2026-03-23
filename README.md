@@ -5,6 +5,11 @@
 [![YOLOv7](https://img.shields.io/badge/YOLO-v7-green.svg)](https://github.com/WongKinYiu/yolov7)
 [![TensorRT](https://img.shields.io/badge/TensorRT-8.0+-green.svg)](https://developer.nvidia.com/tensorrt)
 [![CUDA](https://img.shields.io/badge/CUDA-11.3+-blue.svg)](https://developer.nvidia.com/cuda-toolkit)
+[![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
+
+一站式YOLOv7目标检测解决方案，包含完整训练流程和TensorRT高性能部署。
+
+> **注意**: 本项目基于 [WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7) 官方实现，主要添加了 TensorRT 部署支持和中文文档。核心训练代码来自原仓库。
 
 一站式YOLOv7目标检测解决方案，包含完整训练流程和TensorRT高性能部署。
 
@@ -20,27 +25,47 @@
 
 ```
 yolov7-ultimate/
-├── training/                  # 训练相关
+├── train.py                   # 主训练脚本
+├── test.py                    # 验证/测试脚本
+├── detect.py                  # 检测/推理脚本
+├── export.py                  # 模型导出脚本
+├── models/                    # 模型定义
+│   ├── yolo.py               # YOLO模型架构
+│   ├── common.py             # 通用层定义
+│   └── experimental.py       # 实验性功能
+├── training/                  # 训练相关工具
 │   ├── data_prepare.py       # 数据预处理
-│   ├── train.py              # 训练脚本
-│   ├── val.py                # 验证脚本
-│   └── configs/              # 配置文件
+│   ├── train_example.py      # 训练示例
+│   └── configs/              # 训练配置
 ├── deployment/                # 部署相关
-│   ├── export_onnx.py        # 导出ONNX
-│   ├── build_engine.py       # 构建TensorRT引擎
-│   ├── trt_infer.py          # TensorRT推理
-│   └── benchmark.py          # 性能测试
+│   ├── infer.py              # TensorRT推理
+│   ├── infer_camera.py       # 摄像头推理
+│   ├── export_onnx.py        # ONNX导出
+│   └── trt_models/           # TensorRT模型定义
 ├── utils/                     # 工具函数
 │   ├── datasets.py           # 数据集处理
 │   ├── general.py            # 通用工具
-│   └── visualizer.py         # 可视化工具
+│   ├── loss.py               # 损失函数
+│   ├── metrics.py            # 评估指标
+│   ├── plots.py              # 可视化
+│   └── torch_utils.py        # PyTorch工具
+├── configs/                   # 配置文件
+│   ├── training/             # 训练配置
+│   ├── baseline/             # 基线配置
+│   └── deploy/               # 部署配置
+├── data/                      # 数据配置
+│   ├── *.yaml                # 数据集配置
+│   └── hyp.*.yaml            # 超参数配置
 ├── examples/                  # 示例代码
 │   ├── inference_example.py  # 推理示例
 │   └── train_example.py      # 训练示例
 ├── docs/                      # 文档
 │   ├── TRAINING.md           # 训练指南
 │   ├── DEPLOYMENT.md         # 部署指南
-│   └── FAQ.md                # 常见问题
+│   ├── FAQ.md                # 常见问题
+│   └── MIGRATION.md          # 迁移指南
+├── scripts/                   # 辅助脚本
+├── tools/                     # Jupyter notebooks
 ├── requirements.txt           # 依赖列表
 ├── LICENSE                    # 许可证
 └── README.md                  # 项目说明
@@ -235,11 +260,33 @@ python deployment/calibrate.py --weights best.pt --data data/calib.yaml
 
 本项目基于 [MIT License](LICENSE) 开源。
 
-## 🙏 致谢
+## 🙏 致谢与引用
 
-- [YOLOv7](https://github.com/WongKinYiu/yolov7) - 官方实现
-- [TensorRT](https://developer.nvidia.com/tensorrt) - NVIDIA推理加速
-- [PyTorch](https://pytorch.org/) - 深度学习框架
+本项目基于以下开源项目构建：
+
+- **[YOLOv7](https://github.com/WongKinYiu/yolov7)** - 官方YOLOv7实现 (GPL-3.0 License)
+  - 核心训练代码 (`train.py`, `test.py`, `detect.py` 等)
+  - 模型架构定义
+  - 数据处理和损失函数
+
+- **[TensorRT](https://developer.nvidia.com/tensorrt)** - NVIDIA推理加速
+
+- **[PyTorch](https://pytorch.org/)** - 深度学习框架
+
+如果你使用本项目，请同时引用 YOLOv7 论文：
+
+```bibtex
+@article{wang2022yolov7,
+  title={YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors},
+  author={Wang, Chien-Yao and Bochkovskiy, Alexey and Liao, Hong-Yuan Mark},
+  journal={arXiv preprint arXiv:2207.02696},
+  year={2022}
+}
+```
+
+## 📄 许可证
+
+本项目遵循 [GPL-3.0 License](LICENSE) 开源，与原始 YOLOv7 项目保持一致。
 
 ## 📮 联系
 

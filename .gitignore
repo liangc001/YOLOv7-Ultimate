@@ -25,8 +25,10 @@ wandb/
 *.plan
 *.calib
 
-# Data
-data/
+# Data (keep YAML configs, ignore actual data)
+data/images/
+data/videos/
+data/labels/
 datasets/
 *.jpg
 *.jpeg
