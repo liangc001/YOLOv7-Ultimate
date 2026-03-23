@@ -212,14 +212,25 @@ python deployment/trt_infer.py \
 
 ## 🖼️ 示例
 
+> 运行下面的命令生成示例图片，保存到 `docs/images/` 目录
+
 ### 训练可视化
-![Training](docs/images/training.png)
+```bash
+tensorboard --logdir runs/train
+# 浏览器打开 http://localhost:6006 查看训练曲线
+```
 
 ### 检测结果
-![Detection](docs/images/detection.png)
+```bash
+python detect.py --weights yolov7.pt --source data/images --save-txt
+# 结果保存到 runs/detect/exp/
+```
 
 ### TensorRT加速对比
-![Benchmark](docs/images/benchmark.png)
+```bash
+# 运行 benchmark 比较 PyTorch vs TensorRT 速度
+python deployment/benchmark.py --weights yolov7.pt --engine yolov7.trt
+```
 
 ## 📚 文档
 
