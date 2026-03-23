@@ -3,9 +3,19 @@
 YOLOv7 Inference Example
 
 This script demonstrates how to use YOLOv7 for object detection on images.
+
+Usage:
+    cd /path/to/YOLOv7-Ultimate
+    python examples/inference_example.py --source image.jpg
 """
 
 import argparse
+import sys
+import os
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
 import torch
 from pathlib import Path
 
