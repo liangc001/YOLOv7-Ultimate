@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# PyTorch
+*.pth
+*.pt
+*.ckpt
+runs/
+wandb/
+
+# TensorRT
+*.trt
+*.engine
+*.onnx
+*.plan
+*.calib
+
+# Data
+data/
+datasets/
+*.jpg
+*.jpeg
+*.png
+*.mp4
+*.avi
+*.mov
+!examples/images/*.jpg
+!examples/images/*.png
+!docs/images/*.jpg
+!docs/images/*.png
+
+# Results
+results/
+output/
+inference/
+checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+*.log
+logs/
+tensorboard/
+
+# Model cache
+.cache/
+weights/
+pretrained/
+
+# Temporary
+tmp/
+temp/
+*.tmp
